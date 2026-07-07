@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Départ HTB — Suivi suppressions</title>
+  <link rel="stylesheet" href="style.css">
+  <!--  MODALE COMMENTAIRE -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>Ajouter un commentaire</h3>
+    <p id="modal-desc"></p>
+    <textarea id="modal-comment" placeholder="Commentaire optionnel… (Entrée pour valider, Shift+Entrée pour sauter une ligne)"></textarea>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="modal-skip">Passer</button>
+      <button class="btn-primary"   id="modal-ok">Valider</button>
+    </div>
+  </div>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+</head>
+<body>
+<div class="shell">
+
+  <!-- BARRE DU HAUT -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>Départ HTB</h1>
+      <span class="badge-proj">Suivi suppressions</span>
+    </div>
+    <div class="topbar-right">
+      <span id="date-label"></span>
+      <span id="save-status">✓ Sauvegardé</span>
+    </div>
+  </div>
+
+  <!--  RESPONSABLE -->
+  <div class="owner-bar">
+    <span class="owner-label">Responsable</span>
+    <span class="owner-name">MARLEIX Célia (CMA)</span>
+    <span class="owner-sep">·</span>
+    <span class="owner-label">Projet</span>
+    <span class="owner-name">Départ HTB</span>
+  </div>
+
+  <!-- LES 5 KPIs  -->
+  <div class="kpi-row">
+    <div class="kpi c-muted">
+      <div class="kpi-label">Fonctions</div>
+      <div class="kpi-value" id="kpi-total">—</div>
+      <div class="kpi-sub">dans le projet</div>
+    </div>
+    <div class="kpi c-green">
+      <div class="kpi-label">Supprimées</div>
+      <div class="kpi-value" id="kpi-supprimees">—</div>
+      <div class="kpi-sub">validées</div>
+    </div>
+    <div class="kpi c-orange">
+      <div class="kpi-label">En cours</div>
+      <div class="kpi-value" id="kpi-encours">—</div>
+      <div class="kpi-sub">candidats actifs</div>
+    </div>
+    <div class="kpi c-blue">
+      <div class="kpi-label">Configs testées</div>
+      <div class="kpi-value">2</div>
+      <div class="kpi-sub">packs .15 / .16</div>
+    </div>
+    <div class="kpi c-purple">
+      <div class="kpi-label">Avancement</div>
+      <div class="kpi-value" id="kpi-pct">—</div>
+      <div class="kpi-sub">étapes cochées</div>
+    </div>
+  </div>
+
+  <!-- BARRE DE PROGRESSION GLOBALE  -->
+  <div class="global-wrap">
+    <span class="global-label">Progression globale</span>
+    <div class="global-track">
+      <div class="global-bar" id="global-bar" style="width:0%"></div>
+    </div>
+    <span id="global-pct">0%</span>
+    <span id="global-steps">0 / 0 étapes</span>
+  </div>
+
+  <!-- GRILLE DES FONCTIONS  -->
+  <div class="section-head"><h2>Suivi par fonction — étapes de suppression</h2></div>
+  <div id="fn-grid"></div>
+
+  <!--  TABLEAU DES MESURES  -->
+  <div class="section-head"><h2>Mesures techniques — évolution par pack</h2></div>
+  <div class="mes-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Pack</th>
+          <th>Fonctions supprimées</th>
+          <th>CPU DSP (%)</th>
+          <th>RAM ARM (%)</th>
+          <th>CPU ARM (%)</th>
+          <th>IRAM CCNLF (%)</th>
+          <th>CPU stimulée</th>
+          <th>Statut mesures</th>
+        </tr>
+      </thead>
+      <tbody id="mes-tbody"></tbody>
+    </table>
+  </div>
+
+  <button class="btn-add-pack" onclick="addPack()">+ Ajouter un pack de mesures</button>
+
+  <!--  GRAPHIQUES  -->
+  <div class="section-head"><h2>Graphiques — évolution CPU & mémoire</h2></div>
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">CPU DSP & ARM (%)</div>
+      <div class="chart-area"><canvas id="chart-cpu"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">RAM ARM & IRAM CCNLF (%)</div>
+      <div class="chart-area"><canvas id="chart-ram"></canvas></div>
+    </div>
+  </div>
+
+  <!--  PIED DE PAGE  -->
+  <div class="footer">
+    <span>Données sauvegardées localement · Projet Départ HTB v1.0</span>
+    <button onclick="resetAll()">Réinitialiser les coches</button>
+  </div>
+
+<!-- HISTORIQUE  -->
+  <div class="section-head"><h2>Historique des modifications</h2></div>
+  <div class="history-wrap">
+    <div class="history-empty" id="history-empty">Aucune modification enregistrée.</div>
+    <div id="history-list"></div>
+    <div class="history-footer">
+      <button onclick="exportHistory()">⬇ Exporter l'historique (.txt)</button>
+      <button class="btn-danger" onclick="clearHistory()">Effacer l'historique</button>
+    </div>
+  </div>
+
+
+</div>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -502,11 +502,11 @@ const current = configs[i];
 const previous = configs[i - 1];
 
 diffs.push({
-label: current.supprimees || current.pack, // ex: "PMC", "PW"
-cpu_dsp: (Number(current.cpu_dsp) || 0) - (Number(previous.cpu_dsp) || 0),
-iram: (Number(current.iram) || 0) - (Number(previous.iram) || 0),
-cpu_arm: (Number(current.cpu_arm) || 0) - (Number(previous.cpu_arm) || 0),
-ram: (Number(current.ram) || 0) - (Number(previous.ram) || 0),
+  label: current.supprimees || current.pack,
+  cpu_dsp: (Number(previous.cpu_dsp) || 0) - (Number(current.cpu_dsp) || 0),
+  iram:    (Number(previous.iram) || 0)    - (Number(current.iram) || 0),
+  cpu_arm: (Number(previous.cpu_arm) || 0) - (Number(current.cpu_arm) || 0),
+  ram:     (Number(previous.ram) || 0)     - (Number(current.ram) || 0),
 });
 }
 

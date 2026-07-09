@@ -34,48 +34,40 @@ const STEPS = [
 ];
 
 const FONCTIONS_INIT = [
-{ code: 'PMC', nom: 'Protection masse câble', statut: 'supprimee',
-init: { matlab:1, check_conf:1, preconf:1, ci:1, preconfig:1, studio:1, mes_base:1, mes_cpu:0 } },
-{ code: 'PW', nom: 'Protection wattmétrique', statut: 'en-cours',
-init: { matlab:1, check_conf:1, preconf:1, ci:0, preconfig:0, studio:0, mes_base:0, mes_cpu:0 } },
-{ code: 'ADD', nom: 'Automate de défaillance disjoncteur', statut: 'presente', init: {} },
-{ code: 'ADA', nom: 'Automate de Débouclage', statut: 'presente', init: {} },
-{ code: 'AIVO', nom: "Automate d'inter-verrouillage d'organes", statut: 'analyse', init: {} },
-{ code: 'ARS', nom: 'Automate de Reprise de Service', statut: 'presente', init: {} },
-{ code: 'DISCORDANCE', nom: 'Discordance du disjoncteur', statut: 'presente', init: {} },
-{ code: 'PX tri', nom: 'Protection de distance', statut: 'presente', init: {} },
-{ code: 'BALIS', nom: 'Balisage', statut: 'presente', init: {} },
-{ code: 'CAP', nom: 'Mesures et Capteurs', statut: 'presente', init: {} },
-{ code: 'CCO', nom: 'Contrôle Cohérence', statut: 'presente', init: {} },
-{ code: 'CRITENC', nom: 'Critère Enclenchement', statut: 'presente', init: {} },
-{ code: 'FUSTT', nom: 'Fusion fusible', statut: 'presente', init: {} },
-{ code: 'GEST.DJ', nom: 'Gestion disjoncteur', statut: 'presente', init: {} },
-{ code: 'GEST.ICITN', nom: 'Gestion commutateur ICITN', statut: 'presente', init: {} },
-{ code: 'GEST.SA1', nom: 'Gestion des sectionneurs SA1', statut: 'presente', init: {} },
-{ code: 'GEST.SA2', nom: 'Gestion des sectionneurs SA2', statut: 'presente', init: {} },
-{ code: 'GEST.SL', nom: 'Gestion des sectionneurs SL', statut: 'presente', init: {} },
-{ code: 'GEST.STA', nom: 'Gestion des sectionneurs STA', statut: 'presente', init: {} },
-{ code: 'GEST.STB', nom: 'Gestion des sectionneurs STB', statut: 'presente', init: {} },
-{ code: 'GEST.STC', nom: 'Gestion des sectionneurs STC', statut: 'presente', init: {} },
-{ code: 'GIDBS', nom: 'Gestion Interface Diff. Barres & Superv.', statut: 'presente', init: {} },
-{ code: 'LD', nom: 'Localisation de Défauts', statut: 'presente', init: {} },
-{ code: 'MODEXP', nom: "Mode d'exploitation de la tranche", statut: 'presente', init: {} },
-{ code: 'PERTURBO', nom: 'Perturbographie', statut: 'presente', init: {} },
-{ code: 'PERTURBO BAR', nom: 'Perturbographie barres', statut: 'presente', init: {} },
-{ code: 'SURVUA', nom: 'Surveillance des Polarités', statut: 'presente', init: {} },
-{ code: 'TAC', nom: 'Gestion des Télé-Actions', statut: 'presente', init: {} },
-{ code: 'Equip. tiers', nom: 'Interface protections tiers', statut: 'presente', init: {} },
-{ code: '2 ORG. BAN.', nom: '2 Organes banalisées', statut: 'presente', init: {} },
+  { code: 'PMC', nom: 'Protection masse câble', statut: 'supprimee',
+    init: { matlab:1, check_conf:1, preconf:1, ci:1, preconfig:1, studio:1, mes_base:1, mes_cpu:0 } },
+  { code: 'PW', nom: 'Protection wattmétrique', statut: 'en-cours',
+    init: { matlab:1, check_conf:1, preconf:1, ci:0, preconfig:0, studio:0, mes_base:0, mes_cpu:0 } },
+  { code: 'ADD', nom: 'Automate de défaillance disjoncteur', statut: 'presente', init: {} },
+  { code: 'ADA', nom: 'Automate de Débouclage', statut: 'presente', init: {} },
+  { code: 'AIVO', nom: "Automate d'inter-verrouillage d'organes", statut: 'analyse', init: {} },
+  { code: 'ARS', nom: 'Automate de Reprise de Service', statut: 'presente', init: {} },
+  { code: 'DISCORDANCE', nom: 'Discordance du disjoncteur', statut: 'presente', init: {} },
+  { code: 'PX tri', nom: 'Protection de distance', statut: 'presente', init: {} },
+  { code: 'BALIS', nom: 'Balisage', statut: 'presente', init: {} },
+  { code: 'CAP', nom: 'Mesures et Capteurs', statut: 'presente', init: {} },
+  { code: 'CCO', nom: 'Contrôle Cohérence', statut: 'presente', init: {} },
+  { code: 'CRITENC', nom: 'Critère Enclenchement', statut: 'presente', init: {} },
+  { code: 'FUSTT', nom: 'Fusion fusible', statut: 'presente', init: {} },
+  { code: 'GEST_DJ', nom: 'Gestion disjoncteur', statut: 'presente', init: {} }, // Modifié
+  { code: 'GEST_ICITN', nom: 'Gestion commutateur ICITN', statut: 'presente', init: {} }, // Modifié
+  { code: 'GEST_SA1', nom: 'Gestion des sectionneurs SA1', statut: 'presente', init: {} }, // Modifié
+  { code: 'GEST_SA2', nom: 'Gestion des sectionneurs SA2', statut: 'presente', init: {} }, // Modifié
+  { code: 'GEST_SL', nom: 'Gestion des sectionneurs SL', statut: 'presente', init: {} }, // Modifié
+  { code: 'GEST_STA', nom: 'Gestion des sectionneurs STA', statut: 'presente', init: {} }, // Modifié
+  { code: 'GEST_STB', nom: 'Gestion des sectionneurs STB', statut: 'presente', init: {} }, // Modifié
+  { code: 'GEST_STC', nom: 'Gestion des sectionneurs STC', statut: 'presente', init: {} }, // Modifié
+  { code: 'GIDBS', nom: 'Gestion Interface Diff. Barres & Superv.', statut: 'presente', init: {} },
+  { code: 'LD', nom: 'Localisation de Défauts', statut: 'presente', init: {} },
+  { code: 'MODEXP', nom: "Mode d'exploitation de la tranche", statut: 'presente', init: {} },
+  { code: 'PERTURBO', nom: 'Perturbographie', statut: 'presente', init: {} },
+  { code: 'PERTURBO BAR', nom: 'Perturbographie barres', statut: 'presente', init: {} },
+  { code: 'SURVUA', nom: 'Surveillance des Polarités', statut: 'presente', init: {} },
+  { code: 'TAC', nom: 'Gestion des Télé-Actions', statut: 'presente', init: {} },
+  { code: 'Equip_tiers', nom: 'Interface protections tiers', statut: 'presente', init: {} }, // Modifié
+  { code: '2_ORG_BAN', nom: '2 Organes banalisées', statut: 'presente', init: {} }, // Modifié
 ];
 
-const CONFIGS_INIT = [
-{ pack: 'Base', nom: 'DEPART_HTB',
-supprimees: 'aucune', cpu_dsp: 90, ram: null, cpu_arm: null, iram: null, cpu_stim: null, ok: 'NON' },
-{ pack: '.15', nom: 'DEPART_HTB_SANS_PMC',
-supprimees: 'PMC', cpu_dsp: 77, ram: 60, cpu_arm: 20, iram: 94.6, cpu_stim: '/', ok: 'EN COURS', dsp_max: 84 },
-{ pack: '.16', nom: 'DEPART_HTB_16',
-supprimees: 'PMC, PW', cpu_dsp: 77, ram: 60, cpu_arm: 30, iram: 93.98, cpu_stim: '/', ok: 'EN COURS', dsp_max: 78 },
-];
 
 const STATUT_OPTIONS = [
 { value: 'supprimee', label: 'Supprimée', cls: 's-supprimee' },
@@ -94,6 +86,7 @@ const OK_CLASS = { 'OUI': 'ok-oui', 'EN COURS': 'ok-encours', 'NON': 'ok-non' };
 // state est un miroir local de ce qui est dans Firebase
 // Firebase reste la source de vérité
 let state = { fonctions: {}, configs: [], history: [] };
+let chartCarto = null ;
 
 // Indicateur de connexion
 let firebaseReady = false;
@@ -156,10 +149,14 @@ renderHistory();
 }
 });
 
-}).catch(() => {
-showConnectionStatus(false);
+
+}).catch((error) => {
+  console.error("Erreur d'initialisation Firebase :", error);
+  showConnectionStatus(false);
 });
+
 }
+
 
 // Surveille la connexion réseau
 db.ref('.info/connected').on('value', snap => {
@@ -291,7 +288,6 @@ document.getElementById('global-steps').textContent = `${g.done} / ${g.total} é
 
 
 // 8. CARTES FONCTIONS
-
 
 function renderCards() {
 const grid = document.getElementById('fn-grid');
@@ -485,59 +481,109 @@ logAction('Nouveau pack de mesures ajouté', comment);
 }
 
 
-// 10. GRAPHIQUES
-
-let chartCPU = null;
-let chartRAM = null;
-
+// 10. GRAPHIQUE CARTOGRAPHIE DES POIDS
 function renderCharts() {
-const configs = Array.isArray(state.configs) ? state.configs : Object.values(state.configs || {});
-const labels = configs.map(c => c.pack);
+if (chartCarto) { chartCarto.destroy(); chartCarto = null; }
+
+const configs = Array.isArray(state.configs)
+? state.configs
+: Object.values(state.configs || {});
+
+// On a besoin d'au moins 2 packs pour calculer une différence
+if (configs.length < 2) return;
+
+// ── Calcul des différences ──
+// Pour chaque pack à partir du 2ème :
+// différence = valeur de ce pack - valeur du pack du dessus
+// Le label = la fonction supprimée dans ce pack
+const diffs = [];
+for (let i = 1; i < configs.length; i++) {
+const current = configs[i];
+const previous = configs[i - 1];
+
+diffs.push({
+label: current.supprimees || current.pack, // ex: "PMC", "PW"
+cpu_dsp: (Number(current.cpu_dsp) || 0) - (Number(previous.cpu_dsp) || 0),
+iram: (Number(current.iram) || 0) - (Number(previous.iram) || 0),
+cpu_arm: (Number(current.cpu_arm) || 0) - (Number(previous.cpu_arm) || 0),
+ram: (Number(current.ram) || 0) - (Number(previous.ram) || 0),
+});
+}
+
+const labels = diffs.map(d => d.label);
 const gridColor = 'rgba(255,255,255,.06)';
 const tickColor = '#6b7280';
 
-if (chartCPU) { chartCPU.destroy(); chartCPU = null; }
-if (chartRAM) { chartRAM.destroy(); chartRAM = null; }
-
-chartCPU = new Chart(document.getElementById('chart-cpu'), {
+chartCarto = new Chart(document.getElementById('chart-carto'), {
 type: 'bar',
 data: {
 labels,
 datasets: [
-{ label: 'CPU DSP (%)', data: configs.map(c => c.cpu_dsp ?? null), backgroundColor: 'rgba(79,142,247,.7)', borderColor: '#4f8ef7', borderWidth: 1 },
-{ label: 'CPU ARM (%)', data: configs.map(c => c.cpu_arm ?? null), backgroundColor: 'rgba(46,204,113,.6)', borderColor: '#2ecc71', borderWidth: 1 },
+{
+label: 'CPU DSP (%)',
+data: diffs.map(d => d.cpu_dsp),
+backgroundColor: 'rgba(79,142,247,.8)',
+borderColor: '#4f8ef7',
+borderWidth: 0,
+borderRadius: 3,
+},
+{
+label: 'IRAM CCNLF (%)',
+data: diffs.map(d => d.iram),
+backgroundColor: 'rgba(124,92,191,.8)',
+borderColor: '#7c5cbf',
+borderWidth: 0,
+borderRadius: 3,
+},
+{
+label: 'CPU ARM (%)',
+data: diffs.map(d => d.cpu_arm),
+backgroundColor: 'rgba(243,156,18,.75)',
+borderColor: '#f39c12',
+borderWidth: 0,
+borderRadius: 3,
+},
+{
+label: 'RAM ARM (%)',
+data: diffs.map(d => d.ram),
+backgroundColor: 'rgba(46,204,113,.7)',
+borderColor: '#2ecc71',
+borderWidth: 0,
+borderRadius: 3,
+},
 ]
 },
 options: {
-responsive: true, maintainAspectRatio: false,
-plugins: { legend: { labels: { color: tickColor, font: { size: 10 } } } },
-scales: {
-y: { min: 0, max: 100, ticks: { color: tickColor, font: { size: 10 } }, grid: { color: gridColor } },
-x: { ticks: { color: tickColor, font: { size: 10 } }, grid: { display: false } }
-}
-}
-});
-
-chartRAM = new Chart(document.getElementById('chart-ram'), {
-type: 'bar',
-data: {
-labels,
-datasets: [
-{ label: 'RAM ARM (%)', data: configs.map(c => c.ram ?? null), backgroundColor: 'rgba(243,156,18,.65)', borderColor: '#f39c12', borderWidth: 1 },
-{ label: 'IRAM CCNLF (%)',data: configs.map(c => c.iram ?? null), backgroundColor: 'rgba(124,92,191,.65)', borderColor: '#7c5cbf', borderWidth: 1 },
-]
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: {
+labels: { color: tickColor, font: { size: 10 }, boxWidth: 12 }
 },
-options: {
-responsive: true, maintainAspectRatio: false,
-plugins: { legend: { labels: { color: tickColor, font: { size: 10 } } } },
+tooltip: {
+callbacks: {
+label: ctx => {
+const v = ctx.raw;
+const sign = v > 0 ? '+' : '';
+return ` ${ctx.dataset.label} : ${sign}${v.toFixed(2)}%`;
+}
+}
+}
+},
 scales: {
-y: { min: 0, max: 100, ticks: { color: tickColor, font: { size: 10 } }, grid: { color: gridColor } },
-x: { ticks: { color: tickColor, font: { size: 10 } }, grid: { display: false } }
+x: {
+ticks: { color: tickColor, font: { size: 10 } },
+grid: { display: false }
+},
+y: {
+ticks: { color: tickColor, font: { size: 10 } },
+grid: { color: gridColor },
+border: { color: 'rgba(255,255,255,.2)' }
+}
 }
 }
 });
 }
-
 
 // 11. RESET & RENDER GLOBAL
 

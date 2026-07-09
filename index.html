@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <title>Départ HTB — Suivi suppressions</title>
   <link rel="stylesheet" href="style.css">
-  <!--  MODALE COMMENTAIRE -->
+</head>
+<body>
+
+<!--  MODALE COMMENTAIRE  -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
     <h3>Ajouter un commentaire</h3>
@@ -16,9 +19,7 @@
     </div>
   </div>
 </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-</head>
-<body>
+
 <div class="shell">
 
   <!-- BARRE DU HAUT -->
@@ -107,18 +108,16 @@
 
   <button class="btn-add-pack" onclick="addPack()">+ Ajouter un pack de mesures</button>
 
-  <!--  GRAPHIQUES  -->
-  <div class="section-head"><h2>Graphiques — évolution CPU & mémoire</h2></div>
-  <div class="charts-row">
-    <div class="chart-card">
-      <div class="chart-title">CPU DSP & ARM (%)</div>
-      <div class="chart-area"><canvas id="chart-cpu"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">RAM ARM & IRAM CCNLF (%)</div>
-      <div class="chart-area"><canvas id="chart-ram"></canvas></div>
-    </div>
-  </div>
+  <!-- GRAPHIQUE CARTOGRAPHIE  -->
+<div class="section-head"><h2>Cartographie des poids : impact par fonction</h2></div>
+<div class="chart-card" style="padding: 20px 24px;">
+<div class="chart-title">Impact sur les ressources (points de % gagnés/perdus par suppression)</div>
+<div style="position:relative; height:320px;">
+<canvas id="chart-carto" role="img" aria-label="Cartographie des poids des fonctions"></canvas>
+</div>
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:14px; font-size:10px; color:var(--muted);">
+</div>
+</div>
 
   <!--  PIED DE PAGE  -->
   <div class="footer">
@@ -137,13 +136,16 @@
     </div>
   </div>
 
-
 </div>
+
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
 <!-- Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+
 <script src="script.js"></script>
 </body>
 </html>

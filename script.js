@@ -260,30 +260,52 @@ save('state/history', null);
 
 // 7. KPIs
 
-
 function calcFnPct(code) {
 const s = state.fonctions[code]?.steps || {};
 return Math.round(STEPS.filter(st => s[st.key]).length / STEPS.length * 100);
 }
 
 function globalStats() {
-const total = FONCTIONS_INIT.length * STEPS.length;
-let done = 0;
-FONCTIONS_INIT.forEach(fn => {
-STEPS.forEach(st => { if (state.fonctions[fn.code]?.steps?.[st.key]) done++; });
+// Seules les fonctions "en-cours" et "analyse" (candidate) comptent
+const fonctionsActives = FONCTIONS_INIT.filter(fn => {
+const statut = state.fonctions[fn.code]?.statut;
+return statut === 'en-cours' || statut === 'analyse';
 });
+
+if (fonctionsActives.length === 0) {
+return { total: 0, done: 0, pct: 0 };
+}
+
+const total = fonctionsActives.length * STEPS.length;
+let done = 0;
+fonctionsActives.forEach(fn => {
+STEPS.forEach(st => {
+if (state.fonctions[fn.code]?.steps?.[st.key]) done++;
+});
+});
+
 return { total, done, pct: Math.round(done / total * 100) };
 }
 
+
 function renderKPIs() {
 const g = globalStats();
+// Configs testées = nombre de packs avec statut "OUI"
+const configs = Array.isArray(state.configs)
+? state.configs
+: Object.values(state.configs || {});
+const configsTestees = configs.filter(c => c.ok === 'OUI').length;
+
 document.getElementById('kpi-total').textContent = FONCTIONS_INIT.length;
 document.getElementById('kpi-supprimees').textContent = FONCTIONS_INIT.filter(f => state.fonctions[f.code]?.statut === 'supprimee').length;
 document.getElementById('kpi-encours').textContent = FONCTIONS_INIT.filter(f => state.fonctions[f.code]?.statut === 'en-cours').length;
+document.getElementById('kpi-configs').textContent = configsTestees;
 document.getElementById('kpi-pct').textContent = g.pct + '%';
 document.getElementById('global-pct').textContent = g.pct + '%';
 document.getElementById('global-bar').style.width = g.pct + '%';
-document.getElementById('global-steps').textContent = `${g.done} / ${g.total} étapes`;
+document.getElementById('global-steps').textContent = g.total > 0
+? `${g.done} / ${g.total} étapes (fonctions actives uniquement)`
+: 'Aucune fonction active';
 }
 
 
@@ -407,7 +429,7 @@ tbody.innerHTML += `
 <div class="pack-code editable" data-idx="${idx}" data-field="pack">${cfg.pack}</div>
 <div class="pack-name editable" data-idx="${idx}" data-field="nom">${cfg.nom}</div>
 </td>
-<td><span class="editable" data-idx="${idx}" data-field="supprimees" style="font-size:11px;">${cfg.supprimees}</span></td>
+<td><span class="editable" data-idx="${idx}" data-field="supprimees" style="font-size:11px;" title="Cliquer pour modifier">${cfg.supprimees || '—'}</span></td>
 <td>${fmtBar(cfg.cpu_dsp, dspColor, 'cpu_dsp')}${dspWarn}</td>
 <td>${fmtBar(cfg.ram, 'var(--accent)', 'ram')}</td>
 <td>${fmtBar(cfg.cpu_arm, 'var(--accent)', 'cpu_arm')}</td>
@@ -503,7 +525,7 @@ const previous = configs[i - 1];
 
 diffs.push({
   label: current.supprimees || current.pack,
-  cpu_dsp: Math.abs((Number(current.cpu_dsp) || 0) - (Number(previous.cpu_dsp) || 0)),
+cpu_dsp: Math.abs((Number(current.cpu_dsp) || 0) - (Number(previous.cpu_dsp) || 0)),
 iram: Math.abs((Number(current.iram) || 0) - (Number(previous.iram) || 0)),
 cpu_arm: Math.abs((Number(current.cpu_arm) || 0) - (Number(previous.cpu_arm) || 0)),
 ram: Math.abs((Number(current.ram) || 0) - (Number(previous.ram) || 0)),

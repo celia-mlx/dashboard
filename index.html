@@ -43,7 +43,7 @@
     <span class="owner-name">Départ HTB</span>
   </div>
 
-  <!-- LES 5 KPIs  -->
+  <!-- LES 5 KPIs NETTOYÉS (EXACTEMENT 5) -->
   <div class="kpi-row">
     <div class="kpi c-muted">
       <div class="kpi-label">Fonctions</div>
@@ -62,20 +62,14 @@
     </div>
     <div class="kpi c-blue">
       <div class="kpi-label">Configs testées</div>
-      <div class="kpi-value">2</div>
-      <div class="kpi-sub">packs .15 / .16</div>
+      <div class="kpi-value" id="kpi-configs">—</div>
+      <div class="kpi-sub">statut OUI</div>
     </div>
     <div class="kpi c-purple">
       <div class="kpi-label">Avancement</div>
       <div class="kpi-value" id="kpi-pct">—</div>
       <div class="kpi-sub">étapes cochées</div>
     </div>
-
-<div class="kpi c-blue">
-<div class="kpi-label">Configs testées</div>
-<div class="kpi-value" id="kpi-configs">—</div>
-<div class="kpi-sub">statut OUI</div>
-</div>
   </div>
 
   <!-- BARRE DE PROGRESSION GLOBALE  -->
@@ -115,15 +109,14 @@
   <button class="btn-add-pack" onclick="addPack()">+ Ajouter un pack de mesures</button>
 
   <!-- GRAPHIQUE CARTOGRAPHIE  -->
-<div class="section-head"><h2>Cartographie des poids : impact par fonction</h2></div>
-<div class="chart-card" style="padding: 20px 24px;">
-<div class="chart-title">Impact sur les ressources (points de % gagnés/perdus par suppression)</div>
-<div style="position:relative; height:320px;">
-<canvas id="chart-carto" role="img" aria-label="Cartographie des poids des fonctions"></canvas>
-</div>
-<div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:14px; font-size:10px; color:var(--muted);">
-</div>
-</div>
+  <div class="section-head"><h2>Cartographie des poids : impact par fonction</h2></div>
+  <div class="chart-card" style="padding: 20px 24px;">
+    <div class="chart-title">Impact sur les ressources (points de % gagnés/perdus par suppression)</div>
+    <div style="position:relative; height:320px;">
+      <canvas id="chart-carto" role="img" aria-label="Cartographie des poids des fonctions"></canvas>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:14px; font-size:10px; color:var(--muted);"></div>
+  </div>
 
   <!--  PIED DE PAGE  -->
   <div class="footer">
@@ -131,7 +124,7 @@
     <button onclick="resetAll()">Réinitialiser les coches</button>
   </div>
 
-<!-- HISTORIQUE  -->
+  <!-- HISTORIQUE  -->
   <div class="section-head"><h2>Historique des modifications</h2></div>
   <div class="history-wrap">
     <div class="history-empty" id="history-empty">Aucune modification enregistrée.</div>
@@ -150,7 +143,6 @@
 
 <!-- Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-
 
 <script src="script.js"></script>
 </body>

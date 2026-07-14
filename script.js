@@ -65,12 +65,6 @@ const FONCTIONS_INIT = [
   { code: '2_ORG_BAN', nom: '2 Organes banalisées', statut: 'presente', init: {} },
 ];
 
-// DÉFINITION DE CONFIGS_INIT (Ajoutée pour corriger l'erreur ReferenceError)
-const CONFIGS_INIT = [
-  { pack: 'Pack .15', nom: 'Version Base .15', supprimees: 'Aucune', cpu_dsp: 48, ram: 52, cpu_arm: 34, iram: 21, cpu_stim: 'NON', ok: 'OUI' },
-  { pack: 'Pack .16', nom: 'Maquette Initiale .16', supprimees: 'PMC', cpu_dsp: 45, ram: 50, cpu_arm: 30, iram: 18, cpu_stim: 'OUI', ok: 'NON' }
-];
-
 const STATUT_OPTIONS = [
   { value: 'supprimee', label: 'Supprimée', cls: 's-supprimee' },
   { value: 'en-cours', label: 'En cours', cls: 's-en-cours' },
@@ -84,7 +78,6 @@ const OK_CLASS = { 'OUI': 'ok-oui', 'EN COURS': 'ok-encours', 'NON': 'ok-non' };
 
 
 // 3. STATE LOCAL (miroir de Firebase)
-
 let state = { fonctions: {}, configs: [], history: [] };
 let chartCarto = null;
 let firebaseReady = false;
@@ -153,7 +146,6 @@ db.ref('.info/connected').on('value', snap => {
 });
 
 // 5. SAUVEGARDE DANS FIREBASE
-
 function save(path, value) {
   db.ref(path).set(value)
     .then(() => showConnectionStatus(true))
@@ -162,7 +154,6 @@ function save(path, value) {
 
 
 // 6. HISTORIQUE
-
 function askComment(description, callback) {
   const overlay = document.getElementById('modal-overlay');
   const desc = document.getElementById('modal-desc');
@@ -245,15 +236,13 @@ function clearHistory() {
   save('state/history', null);
 }
 
-// 7. KPIs & STATS (Fonction principale corrigée)
-
+// 7. KPIs & STATS 
 function calcFnPct(code) {
   const s = state.fonctions[code]?.steps || {};
   return Math.round(STEPS.filter(st => s[st.key]).length / STEPS.length * 100);
 }
 
 function globalStats() {
-  // CORRECTION : On prend maintenant "en-cours", "analyse" (candidate) ET "supprimee"
   const fonctionsActives = FONCTIONS_INIT.filter(fn => {
     const statut = state.fonctions[fn.code]?.statut || fn.statut;
     return statut === 'en-cours' || statut === 'analyse' || statut === 'supprimee';
